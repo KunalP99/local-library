@@ -5,7 +5,6 @@ const BookInstance = require("../models/bookinstance");
 const { body, validationResult } = require("express-validator");
 
 const async = require("async");
-const book = require("../models/book");
 
 exports.index = (req, res) => {
   async.parallel(
@@ -202,7 +201,7 @@ exports.book_delete_get = (req, res, next) => {
   async.parallel(
     {
       book(callback) {
-        book.findById(req.params.id).exec(callback);
+        Book.findById(req.params.id).exec(callback);
       },
       book_bookinstances(callback) {
         BookInstance.find({ book: req.params.id }).exec(callback);
@@ -241,7 +240,7 @@ exports.book_delete_post = (req, res, next) => {
         return next(err);
       }
 
-      if (results.book_bookinstances.legth > 0) {
+      if (results.book_bookinstances.length > 0) {
         res.render("book_delete", {
           title: "Delete Book",
           book: results.book,

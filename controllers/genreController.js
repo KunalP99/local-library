@@ -2,7 +2,6 @@ const Book = require("../models/book");
 const async = require("async");
 const Genre = require("../models/genre");
 const { body, validationResult } = require("express-validator");
-const genre = require("../models/genre");
 
 // Display list of all Genre.
 exports.genre_list = (req, res, next) => {
@@ -109,7 +108,7 @@ exports.genre_delete_get = (req, res, next) => {
   async.parallel(
     {
       genre(callback) {
-        genre.findById(req.params.id).exec(callback);
+        Genre.findById(req.params.id).exec(callback);
       },
       genres_books(callback) {
         Book.find({ genre: req.params.id }).exec(callback);
