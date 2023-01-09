@@ -179,7 +179,7 @@ exports.genre_update_get = (req, res, next) => {
       return next(err);
     }
     // Success.
-    res.render("genre_form", { title: "Update Genre", genre: genre });
+    res.render("genre_form", { title: "Update Genre", genre });
   });
 };
 
